@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>상가페이지</title>
+<title>Insert title here</title>
 </head>
 <body>
-	<p><a href="board/list">리스트로</a></p>
+	<script type="text/javascript">
+		alert("아이디와 비밀번호를 확인해주세요.");
+		self.location = "/main/login";
+	</script>
 </body>
 </html>

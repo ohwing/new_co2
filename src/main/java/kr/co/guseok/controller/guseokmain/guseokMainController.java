@@ -1,6 +1,7 @@
 package kr.co.guseok.controller.guseokmain;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,7 +24,7 @@ public class guseokMainController {
 	 * @param guseokMainVO
 	 * @return
 	 */
-	@RequestMapping(value = "/main")
+	@RequestMapping(value = "/main", method=RequestMethod.GET)
 	public String main(Model model, guseokMainVO guseokMainVo) {
 		
 		/**
@@ -31,6 +32,8 @@ public class guseokMainController {
 		 * 이달의 베스트 상가
 		 * 공지사항 FAQ
 		 */
+//		model.addAttribute("login", guseokMainVo);
+		
 		return "main/main";
 	}
 	
@@ -80,19 +83,15 @@ public class guseokMainController {
 	 * @return
 	 */
 	@RequestMapping(value = "/loginproc", method=RequestMethod.POST)
-	public String loginProc(Model model, HttpServletRequest request, guseokMainVO guseokMainVo) {
+	public void loginProc(Model model, guseokMainVO guseokMainVo, HttpServletRequest request, HttpSession httpSession) {
 		
 		guseokMainVo.setEmail(request.getParameter("email"));
 		guseokMainVo.setPw(request.getParameter("pw"));
 		
 		//이름변경 할 것 selectSangaMember
 		guseokMainVO sanga_login = mainService.guseokSangaMember(guseokMainVo);
-		
-		if(sanga_login != null) {
-			return "redirect:/main/main";
-		} else {
-			return "redirect:/main/login";
-		}
-		
+
+		model.addAttribute("user", sanga_login);
+
 	}
 }

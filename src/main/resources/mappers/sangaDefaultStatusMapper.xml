@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.guseok.mapper.sangaDefaultStatusMapper">
+	<select id="getSanga" resultType="kr.co.guseok.vo.guseoksanga.guseokSangaVO">
+		SELECT 
+			SEQ,
+			API_TOURKEY_ID,
+			STORE_ID,
+			FILE_ID,
+			STORE_ADDR1,
+			STORE_ADDR2,
+			STORE_ADDR3,
+			EVENT_COMMENT,
+			REG_DT,
+			REG_FILE_ID,
+			MOD_DT,
+			MOD_FILE_ID
+		FROM 
+			sanga_default_status
+	</select>
+	
+	<insert id="insertSanga">
+		insert into sanga_default_status 
+		(
+			SEQ,
+			API_TOURKEY_ID,
+			STORE_ID,
+			FILE_ID,
+			STORE_ADDR1,
+			STORE_ADDR2,
+			STORE_ADDR3,
+			EVENT_COMMENT,
+			REG_DT,
+			REG_STORE_ID,
+			MOD_DT,
+			MOD_STORE_ID
+		) 
+		VALUES 
+		(
+			(SELECT MAX(SEQ)+1 FROM sanga_default_status ALIAS_FOR_SUBQUERY),
+			"",
+			#{store_id},
+			null,
+			#{store_addr1},
+			#{store_addr2},
+			#{store_addr3},
+			#{event_comment},
+			NOW(),
+			#{store_id},
+			NOW(),
+			#{store_id}
+		)
+	</insert>
+	
+	<insert id="insertMemberStore">
+		insert into sanga_member 
+		(
+			STORE_ID
+		) 
+		VALUES 
+		(
+			#{store_id}
+		)
+	</insert>
+</mapper> 
+
