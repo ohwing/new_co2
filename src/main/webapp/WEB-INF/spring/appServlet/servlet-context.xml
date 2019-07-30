@@ -13,6 +13,7 @@
 	
 	<mvc:interceptors>
 		<mvc:interceptor>
+			
 			<mvc:mapping path="/main/loginproc"/>
 			<beans:ref bean="loginInterceptor"/>
 		</mvc:interceptor>

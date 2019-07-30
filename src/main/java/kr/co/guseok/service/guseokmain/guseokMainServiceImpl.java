@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.guseok.dao.guseokmain.guseokMainDAO;
-import kr.co.guseok.vo.guseokmain.guseokMainVO;
+import kr.co.guseok.vo.guseokmember.guseokMemberVO;
 
 @Service
 public class guseokMainServiceImpl implements guseokMainService{
@@ -13,15 +13,15 @@ public class guseokMainServiceImpl implements guseokMainService{
 	private guseokMainDAO mainDao;
 	
 	@Override
-	public guseokMainVO guseokSangaMember(guseokMainVO guseokMainVo) {
+	public guseokMemberVO guseokSangaMember(guseokMemberVO guseokMemberVo) {
 		// TODO Auto-generated method stub
-		return mainDao.guseokSangaMember(guseokMainVo);
+		return mainDao.guseokSangaMember(guseokMemberVo);
 	}
 
 	@Override
-	public void insertSangaMember(guseokMainVO guseokMainVo) {
+	public void insertSangaMember(guseokMemberVO guseokMemberVo) {
 		// TODO Auto-generated method stub
-		mainDao.insertSangaMember(guseokMainVo);
+		mainDao.insertSangaMember(guseokMemberVo);
 	}
 
 }

@@ -37,7 +37,7 @@
 		) 
 		VALUES 
 		(
-			(SELECT MAX(SEQ)+1 FROM sanga_default_status ALIAS_FOR_SUBQUERY),
+			(select SEQ_VAL from sanga_seq ALIAS_FOR_SUBQUERY where SEQ_NAME = 'sanga_seq'),
 			"",
 			#{store_id},
 			null,
@@ -52,15 +52,13 @@
 		)
 	</insert>
 	
-	<insert id="insertMemberStore">
-		insert into sanga_member 
-		(
-			STORE_ID
-		) 
-		VALUES 
-		(
-			#{store_id}
-		)
+	<insert id="updateMemberStore">
+		update 
+			sanga_member 
+		set 
+			store_id =  #{store_id}
+		where 
+			email = #{email}
 	</insert>
 </mapper> 
 

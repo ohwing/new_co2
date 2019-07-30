@@ -4,7 +4,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.co.guseok.vo.guseokmain.guseokMainVO;
+import kr.co.guseok.vo.guseokmember.guseokMemberVO;
 
 @Repository
 public class guseokMainDAOImpl implements guseokMainDAO{
@@ -14,16 +14,16 @@ public class guseokMainDAOImpl implements guseokMainDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public guseokMainVO guseokSangaMember(guseokMainVO guseokMainVo) {
+	public guseokMemberVO guseokSangaMember(guseokMemberVO guseokMemberVo) {
 		// TODO Auto-generated method stub
 		
-		return (guseokMainVO) sqlSession.selectOne(namespace+".getMember", guseokMainVo);
+		return (guseokMemberVO) sqlSession.selectOne(namespace+".getMember", guseokMemberVo);
 	}
 
 	@Override
-	public void insertSangaMember(guseokMainVO guseokMainVo) {
+	public void insertSangaMember(guseokMemberVO guseokMemberVo) {
 		// TODO Auto-generated method stub
-		sqlSession.insert(namespace+".insertMember", guseokMainVo);
+		sqlSession.insert(namespace+".insertMember", guseokMemberVo);
 	}
 
 }

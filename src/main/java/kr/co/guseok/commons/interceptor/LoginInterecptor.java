@@ -8,8 +8,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import kr.co.guseok.vo.guseokmain.guseokMainVO;
-
 public class LoginInterecptor extends HandlerInterceptorAdapter {
 
 	private static final String LOGIN = "login";
@@ -22,15 +20,12 @@ public class LoginInterecptor extends HandlerInterceptorAdapter {
 			ModelAndView modelAndView) throws Exception {
 		HttpSession httpSession = request.getSession();
 		ModelMap modelmap = modelAndView.getModelMap();
-		guseokMainVO userVo = (guseokMainVO) modelmap.get("user");
+		Object userVo = modelmap.get("login");
 		
 		if(userVo != null) {
 			System.out.println("new login success");
 			httpSession.setAttribute(LOGIN, userVo);
-			System.out.println(userVo.getEmail());
-			System.out.println(userVo.getPw());
 			response.sendRedirect("main");
-			
 		}
 	}
 

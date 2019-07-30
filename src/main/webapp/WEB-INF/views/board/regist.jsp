@@ -8,6 +8,8 @@
 </head>
 <body>
 	<form action="/board/registproc" method="post">
+		
+<%-- 		<input type="hidden" id="email" name="email" value="${login.email}" > --%>
 <!-- 		관광지선택<input id="location" name="location" type="text"> -->
 		도<input id="store_addr1" name="store_addr1" type="text">
 		시/군/구<input id="store_addr2" name="store_addr2" type="text">

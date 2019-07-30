@@ -1,8 +1,8 @@
 package kr.co.guseok.dao.guseokmain;
 
-import kr.co.guseok.vo.guseokmain.guseokMainVO;
+import kr.co.guseok.vo.guseokmember.guseokMemberVO;
 
 public interface guseokMainDAO {
-	public guseokMainVO guseokSangaMember(guseokMainVO guseokMainVo);
-	public void insertSangaMember(guseokMainVO guseokMainVo);
+	public guseokMemberVO guseokSangaMember(guseokMemberVO guseokMemberVo);
+	public void insertSangaMember(guseokMemberVO guseokMemberVo);
 }

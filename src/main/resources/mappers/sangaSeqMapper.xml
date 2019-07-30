@@ -1,35 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.guseok.mapper.sangaSeqMapper">
-	<select id="selectSeq" resultType="int">
+	<select id="selectSeq" resultType="kr.co.guseok.vo.guseokseq.guseokSeqVO">
 		select 
-			seq
-			, store_id
-			, email
-			, pw
-			, reg_dt
+			SEQ_NAME, 
+			SEQ_VAL 
 		from 
-			sanga_member
-		where
-			email=#{email} 
-			and pw = #{pw}
+			sanga_seq 
+		where 
+			SEQ_NAME = #{seq_name};
 	</select>
 	
 	<update id="updateSeq">
-		insert into sanga_member 
-		(
-			SEQ, 
-			EMAIL, 
-			PW, 
-			REG_DT
-		) 
-		VALUES 
-		(
-			(SELECT MAX(SEQ)+1 FROM sanga_member ALIAS_FOR_SUBQUERY),
-			#{email},
-			#{pw},
-			NOW()
-		)
+		update 
+			sanga_seq 
+		set 
+			seq_val = #{seq_val}
+		where 
+			seq_name = #{seq_name} 
 	</update>
 </mapper> 
 
