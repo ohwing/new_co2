@@ -10,13 +10,21 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- 마리아 데이터베이스  -->
+	<!-- 마리아 데이터베이스  Local DB -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
 		<property name="url" value="jdbc:mariadb://localhost:3306/jspdb" />
 		<property name="username" value="ohwig1" />
 		<property name="password" value="dhwpdnd2@" />
 	</bean>
+
+	<!-- 마리아 데이터베이스  Oper BD -->
+<!-- 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> -->
+<!-- 		<property name="driverClassName" value="org.mariadb.jdbc.Driver" /> -->
+<!-- 		<property name="url" value="jdbc:mariadb://umj7-006.cafe24.com:3306/ohwig1" /> -->
+<!-- 		<property name="username" value="ohwig1" /> -->
+<!-- 		<property name="password" value="Dhwpdnd2@" /> -->
+<!-- 	</bean> -->
 
 	<!-- value는 값을 지정 ref는 이미 지정한 값을 가져오는 것 -->
 	<bean id="SqlSessionFectory" class="org.mybatis.spring.SqlSessionFactoryBean">

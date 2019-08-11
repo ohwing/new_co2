@@ -1,8 +1,11 @@
 package kr.co.guseok.controller.guseokmain;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +22,9 @@ import kr.co.guseok.vo.guseokmember.guseokMemberVO;
 public class guseokMainController {
 	@Autowired
 	private guseokMainService mainService;
+	
+	private final Logger logger = LoggerFactory.getLogger(guseokMainController.class);
+
 
 	/**
 	 * 메인페이지
@@ -28,7 +34,7 @@ public class guseokMainController {
 	 */
 	@RequestMapping(value = "/main", method=RequestMethod.GET)
 	public String main(Model model, guseokMainVO guseokMainVo) {
-		
+		logger.debug("인터럽트 테스트");
 		/**
 		 * 최신 상가 정보
 		 * 이달의 베스트 상가

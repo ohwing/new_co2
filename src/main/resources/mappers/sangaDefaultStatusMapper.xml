@@ -12,11 +12,62 @@
 			STORE_ADDR3,
 			EVENT_COMMENT,
 			REG_DT,
-			REG_FILE_ID,
+			REG_USER_ID,
 			MOD_DT,
-			MOD_FILE_ID
+			MOD_USER_ID
 		FROM 
 			sanga_default_status
+	</select>
+	
+	<select id="selectListSanga" resultType="kr.co.guseok.vo.guseoksanga.guseokSangaVO">
+	 	select 
+			 a.SEQ
+			, b.EMAIL
+			, a.STORE_ID
+			, a.STORE_ADDR1
+			, a.STORE_ADDR2
+			, a.STORE_ADDR3
+			, a.EVENT_COMMENT
+			, a.REG_DT
+			, a.MOD_DT
+		from 
+			sanga_default_status a
+			, sanga_member b
+		where a.STORE_ID = b.STORE_ID
+		order by a.seq desc
+	</select>
+	
+	<select id="selectViewSanga" resultType="kr.co.guseok.vo.guseoksanga.guseokSangaVO">
+		select 
+			 a.SEQ
+			, b.EMAIL
+			, a.STORE_ID
+			, a.FILE_ID
+			, a.STORE_ADDR1
+			, a.STORE_ADDR2
+			, a.STORE_ADDR3
+			, a.EVENT_COMMENT
+			, a.REG_DT
+			, a.MOD_DT
+		from 
+			sanga_default_status a
+			, sanga_member b
+		where a.STORE_ID = b.STORE_ID
+		  and a.SEQ = #{page}
+	</select>
+	
+	<!-- 상가 등록 이미지 View -->
+	<select id="selectSangaImage" resultType="kr.co.guseok.vo.guseoksanga.guseokSangaUploadVO">
+		SELECT 
+			SEQ
+			,FILE_ID
+			,ATCHMNFL_MASK_NM
+			,ATCHMNFL_NM
+			,REG_DT
+		FROM 
+			sanga_images
+		WHERE 
+			file_id = #{file_id}
 	</select>
 	
 	<insert id="insertSanga">
@@ -31,9 +82,9 @@
 			STORE_ADDR3,
 			EVENT_COMMENT,
 			REG_DT,
-			REG_STORE_ID,
+			REG_USER_ID,
 			MOD_DT,
-			MOD_STORE_ID
+			MOD_USER_ID
 		) 
 		VALUES 
 		(
@@ -46,19 +97,82 @@
 			#{store_addr3},
 			#{event_comment},
 			NOW(),
-			#{store_id},
+			#{email},
 			NOW(),
-			#{store_id}
+			#{email}
 		)
 	</insert>
 	
-	<insert id="updateMemberStore">
+	<update id="updateSanga">
+		update sanga_default_status 
+		set 
+			STORE_ID = #{store_id},
+			STORE_ADDR1 = #{store_addr1},
+			STORE_ADDR2 = #{store_addr2},
+			STORE_ADDR3 = #{store_addr3},
+			EVENT_COMMENT = #{event_comment},
+			MOD_DT = NOW(),
+			MOD_USER_ID = #{email}
+		where 
+			SEQ = #{seq}
+	</update>
+	
+	<update id="updateMemberStore">
 		update 
 			sanga_member 
 		set 
 			store_id =  #{store_id}
 		where 
 			email = #{email}
+	</update>
+	
+	<!-- 상가이미지 업로드 쿼리 -->
+	<insert id="insertImageUpload">
+		insert into sanga_images 
+		(
+			SEQ, 
+			FILE_ID, 
+			ATCHMNFL_MASK_NM, 
+			ATCHMNFL_NM, 
+			REG_DT
+		) 
+		values
+		(
+			(select SEQ_VAL from sanga_seq ALIAS_FOR_SUBQUERY where SEQ_NAME = 'images_seq')
+			,(select SEQ_VAL from sanga_seq ALIAS_FOR_SUBQUERY where SEQ_NAME = 'sangaImgFile_seq')
+			,#{atchmnfl_mask_nm}
+			,#{atchmnfl_nm}
+			,NOW()
+		)
 	</insert>
+	
+	<update id="updateImageUpload">
+		
+	</update>
+	
+	<update id="updateSangaFileid">
+		update 
+			sanga_default_status
+		set
+			FILE_ID = (select SEQ_VAL from sanga_seq ALIAS_FOR_SUBQUERY where SEQ_NAME = 'sangaImgFile_seq')
+		WHERE
+			SEQ = (select SEQ_VAL from sanga_seq ALIAS_FOR_SUBQUERY where SEQ_NAME = 'sanga_seq')
+	</update>
+	
+	<delete id="deleteSangaImage">
+		DELETE
+		FROM 
+			sanga_images
+		WHERE 
+			file_id = #{file_id}
+	</delete>
+	
+	<delete id="deleteSangaDefaultStatus">
+		DELETE
+		FROM 
+			sanga_default_status
+		WHERE 
+			SEQ = #{seq}	
+	</delete>
 </mapper> 
 

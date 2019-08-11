@@ -1,6 +1,7 @@
 package kr.co.guseok;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * Handles requests for the application home page.
@@ -8,5 +9,9 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class HomeController {
 	
+	@RequestMapping(value = "/")
+	public String main() {
+		return "redirect:/main/main";
+	}
 	
 }

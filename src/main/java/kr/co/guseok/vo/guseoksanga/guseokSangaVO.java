@@ -4,15 +4,17 @@ public class guseokSangaVO {
 	private Long seq;
 	private String api_tourkey_id = null;
 	private String store_id = null;
-	private String file_id = null;
+	private int file_id = 0;
 	private String store_addr1 = null;
 	private String store_addr2 = null;
 	private String store_addr3 = null;
 	private String event_comment = null;
 	private String reg_dt = null;
-	private String reg_file_id = null;
+	private String reg_user_id = null;
 	private String mod_dt = null;
-	private String mod_file_id = null;
+	private String mod_user_id = null;
+
+	private String email = null;
 
 	public Long getSeq() {
 		return seq;
@@ -28,14 +30,6 @@ public class guseokSangaVO {
 
 	public void setApi_tourkey_id(String api_tourkey_id) {
 		this.api_tourkey_id = api_tourkey_id;
-	}
-
-	public String getFile_id() {
-		return file_id;
-	}
-
-	public void setFile_id(String file_id) {
-		this.file_id = file_id;
 	}
 
 	public String getStore_addr1() {
@@ -78,14 +72,6 @@ public class guseokSangaVO {
 		this.reg_dt = reg_dt;
 	}
 
-	public String getReg_file_id() {
-		return reg_file_id;
-	}
-
-	public void setReg_file_id(String reg_file_id) {
-		this.reg_file_id = reg_file_id;
-	}
-
 	public String getMod_dt() {
 		return mod_dt;
 	}
@@ -94,20 +80,44 @@ public class guseokSangaVO {
 		this.mod_dt = mod_dt;
 	}
 
-	public String getMod_file_id() {
-		return mod_file_id;
-	}
-
-	public void setMod_file_id(String mod_file_id) {
-		this.mod_file_id = mod_file_id;
-	}
-
 	public String getStore_id() {
 		return store_id;
 	}
 
 	public void setStore_id(String store_id) {
 		this.store_id = store_id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getReg_user_id() {
+		return reg_user_id;
+	}
+
+	public void setReg_user_id(String reg_user_id) {
+		this.reg_user_id = reg_user_id;
+	}
+
+	public String getMod_user_id() {
+		return mod_user_id;
+	}
+
+	public void setMod_user_id(String mod_user_id) {
+		this.mod_user_id = mod_user_id;
+	}
+
+	public int getFile_id() {
+		return file_id;
+	}
+
+	public void setFile_id(int file_id) {
+		this.file_id = file_id;
 	}
 
 }

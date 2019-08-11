@@ -25,7 +25,7 @@
 		) 
 		VALUES 
 		(
-			(SELECT MAX(SEQ)+1 FROM sanga_member ALIAS_FOR_SUBQUERY),
+			(select SEQ_VAL from sanga_seq ALIAS_FOR_SUBQUERY where SEQ_NAME = 'sangaMem_seq'),
 			#{email},
 			#{pw},
 			NOW()
