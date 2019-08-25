@@ -7,14 +7,19 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kr.co.guseok.commons.paging.Criteria;
+import kr.co.guseok.controller.guseokmain.guseokMainController;
 import kr.co.guseok.dao.guseoksanga.guseokSangaDAO;
 import kr.co.guseok.dao.guseokseq.guseokSeqDAO;
 import kr.co.guseok.vo.guseokmember.guseokMemberVO;
@@ -25,13 +30,20 @@ import kr.co.guseok.vo.guseokseq.guseokSeqVO;
 @Service
 public class guseokSangaServiceImpl implements guseokSangaService{
 
+	private final Logger logger = LoggerFactory.getLogger(guseokSangaServiceImpl.class);
+	
 	@Autowired
 	private guseokSangaDAO sangaDao;
 	
 	@Autowired
 	private guseokSeqDAO seqDao;
 	
-	String savePath = "D:\\upload\\images";
+	//로컬 경로
+//	String savePath = "D:\\upload\\images";
+	
+	//운영경로
+	String savePath = "/ohwig1/tomcat/webapps/fileupload";
+	
     int sizeLimit = 3 * 1024 * 1024;
 	
 	@Override
@@ -51,6 +63,12 @@ public class guseokSangaServiceImpl implements guseokSangaService{
 		return sangaDao.selectListSangaDefaultStatus();
 		
 	}
+	
+	@Override
+	public List<guseokSangaVO> selectListSangaSearch(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sangaDao.selectListSangaSearch(map);
+	}
 
 	@Override
 	public guseokSangaVO selectViewSangaDefaultStatus(String page) {
@@ -59,6 +77,8 @@ public class guseokSangaServiceImpl implements guseokSangaService{
 	}
 	
 	public String imgUpLoader(MultipartHttpServletRequest request, List<MultipartFile> uploadFile, guseokMemberVO guseokMemberVo) throws Exception {
+		
+//		savePath = request.getServletPath();
 		
 		OutputStream out = null;
         PrintWriter printWriter = null;
@@ -141,11 +161,56 @@ public class guseokSangaServiceImpl implements guseokSangaService{
 	public void deleteImageFile(List<guseokSangaUploadVO> sangaImages) {
 		// TODO Auto-generated method stub
 		for(guseokSangaUploadVO images : sangaImages) {
-			File file = new File(savePath+"\\"+images.getAtchmnfl_mask_nm());
+			File file = new File(savePath+"/"+images.getAtchmnfl_mask_nm());
 			if(file.exists() == true) {
+				logger.debug(savePath+"/"+images.getAtchmnfl_mask_nm());
 				file.delete();
 			}
 		}
 	}
+
+	@Override
+	public List<guseokSangaVO> selectSangaNewestList() {
+		// TODO Auto-generated method stub
+		return sangaDao.selectSangaNewestList();
+	}
+
+	@Override
+	public List<guseokSangaVO> selectPagingList(Criteria criteria) {
+		// TODO Auto-generated method stub
+		return sangaDao.selectPagingList(criteria);
+	}
+
+	@Override
+	public int selectListCount(Criteria criteria) {
+		// TODO Auto-generated method stub
+		return sangaDao.selectListCount(criteria);
+	}
+
+	@Override
+	public int selectSearchListCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sangaDao.selectSearchListCount(map);
+	}
+
+	@Override
+	public void updateSangaNullImage(guseokSangaVO guseokSangaVo) {
+		// TODO Auto-generated method stub
+		sangaDao.updateSangaNullImage(guseokSangaVo);
+	}
+
+	@Override
+	public void updateSangaMemberStore(guseokSangaVO guseokSangaVo) {
+		// TODO Auto-generated method stub
+		sangaDao.updateSangaMemberStore(guseokSangaVo);
+	}
+
+	@Override
+	public List<guseokSangaVO> getSanga() {
+		// TODO Auto-generated method stub
+		return sangaDao.getSanga();
+	}
+
+	
 	
 }

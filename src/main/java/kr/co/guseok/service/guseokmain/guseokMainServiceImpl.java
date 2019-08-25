@@ -13,9 +13,9 @@ public class guseokMainServiceImpl implements guseokMainService{
 	private guseokMainDAO mainDao;
 	
 	@Override
-	public guseokMemberVO guseokSangaMember(guseokMemberVO guseokMemberVo) {
+	public guseokMemberVO selectOneSangaMember(guseokMemberVO guseokMemberVo) {
 		// TODO Auto-generated method stub
-		return mainDao.guseokSangaMember(guseokMemberVo);
+		return mainDao.selectOneSangaMember(guseokMemberVo);
 	}
 
 	@Override

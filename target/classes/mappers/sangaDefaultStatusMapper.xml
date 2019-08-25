@@ -1,12 +1,81 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.co.guseok.mapper.sangaDefaultStatusMapper">
+	<select id="selectPagingList" parameterType="kr.co.guseok.commons.paging.Criteria" resultType="kr.co.guseok.vo.guseoksanga.guseokSangaVO">
+		<![CDATA[
+		SELECT 
+			/*sangaDefaultStatusMapper - selectPagingList*/
+			a.SEQ,
+			a.API_TOURKEY_ID,
+			b.EMAIL,
+			a.STORE_ID,
+			a.FILE_ID,
+			a.TOUR_ADDR1,
+			a.TOUR_ADDR2,
+			a.TOUR_ADDR3,
+			a.STORE_ADDR1,
+			a.STORE_ADDR2,
+			a.STORE_ADDR3,
+			a.EVENT_COMMENT,
+			a.REG_DT,
+			a.REG_USER_ID,
+			a.MOD_DT,
+			a.MOD_USER_ID
+		FROM sanga_default_status a,
+			sanga_member b
+		WHERE a.SEQ > 0
+		AND a.STORE_ID = b.STORE_ID
+		AND a.REG_USER_ID = b.EMAIL
+		ORDER BY a.SEQ DESC, a.REG_DT DESC
+		LIMIT #{pageStart}, #{perPageNum}
+		]]>
+	</select>
+	
+	<select id="selectListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM sanga_default_status a,
+			sanga_member b
+		WHERE a.SEQ > 0
+		AND a.STORE_ID = b.STORE_ID
+		AND a.REG_USER_ID = b.EMAIL
+	</select>
+	
+	<select id="selectSearchListCount" resultType="int">
+		SELECT
+		/*sangaDefaultStatusMapper - selectSearchListCount*/ 
+			COUNT(*)
+		FROM sanga_default_status a,
+			sanga_member b
+		WHERE a.SEQ > 0
+		and a.store_id = b.store_id
+		AND a.REG_USER_ID = b.EMAIL
+		
+		<if test='searchTour == "" and searchStore == ""'>
+		</if>
+		
+		<if test='searchTour != "" and searchStore != ""'>
+			and a.TOUR_ADDR3 like concat(concat('%',#{searchTour},'%'))
+			and a.STORE_ID like concat(concat('%',#{searchStore},'%'))
+		</if>
+		
+		<if test='searchTour != "" and searchStore == ""'>
+			and a.TOUR_ADDR3 like concat(concat('%',#{searchTour},'%'))
+		</if>
+		
+		<if test='searchTour == "" and searchStore != ""'>
+			and a.STORE_ID like concat(concat('%',#{searchStore},'%'))
+		</if>
+	</select>
+
 	<select id="getSanga" resultType="kr.co.guseok.vo.guseoksanga.guseokSangaVO">
 		SELECT 
 			SEQ,
 			API_TOURKEY_ID,
 			STORE_ID,
 			FILE_ID,
+			TOUR_ADDR1,
+			TOUR_ADDR2,
+			TOUR_ADDR3,
 			STORE_ADDR1,
 			STORE_ADDR2,
 			STORE_ADDR3,
@@ -19,11 +88,44 @@
 			sanga_default_status
 	</select>
 	
+	<select id="selectSangaNewestList" resultType="kr.co.guseok.vo.guseoksanga.guseokSangaVO">
+		SELECT 
+			/*sangaDefaultStatusMapper - selectSangaNewestList*/
+			sanga.SEQ,
+			sanga.API_TOURKEY_ID,
+			sanga.STORE_ID,
+			sanga.FILE_ID,
+			sanga.TOUR_ADDR1,
+			sanga.TOUR_ADDR2,
+			sanga.TOUR_ADDR3,
+			sanga.STORE_ADDR1,
+			sanga.STORE_ADDR2,
+			sanga.STORE_ADDR3,
+			sanga.EVENT_COMMENT,
+			sanga.REG_DT,
+			sanga.REG_USER_ID,
+			sanga.MOD_DT,
+			sanga.MOD_USER_ID
+		FROM 
+			sanga_default_status sanga,
+			sanga_member member
+		WHERE
+			sanga.STORE_ID = member.STORE_ID
+			AND sanga.REG_USER_ID = member.EMAIL
+		ORDER BY REG_DT DESC
+		LIMIT 9
+	</select>
+	
 	<select id="selectListSanga" resultType="kr.co.guseok.vo.guseoksanga.guseokSangaVO">
 	 	select 
+	 		/*sangaDefaultStatusMapper - selectListSanga*/
 			 a.SEQ
+			, a.API_TOURKEY_ID
 			, b.EMAIL
 			, a.STORE_ID
+			, a.TOUR_ADDR1
+			, a.TOUR_ADDR2
+			, a.TOUR_ADDR3
 			, a.STORE_ADDR1
 			, a.STORE_ADDR2
 			, a.STORE_ADDR3
@@ -34,15 +136,61 @@
 			sanga_default_status a
 			, sanga_member b
 		where a.STORE_ID = b.STORE_ID
+		AND a.REG_USER_ID = b.EMAIL
 		order by a.seq desc
+	</select>
+	
+	<select id="selectListSangaSearch" parameterType="hashmap" resultType="kr.co.guseok.vo.guseoksanga.guseokSangaVO">
+		select 
+			/*sangaDefaultStatusMapper - selectListSangaSearch*/
+			 a.SEQ
+			, a.API_TOURKEY_ID
+			, b.EMAIL
+			, a.STORE_ID
+			, a.TOUR_ADDR1
+			, a.TOUR_ADDR2
+			, a.TOUR_ADDR3
+			, a.STORE_ADDR1
+			, a.STORE_ADDR2
+			, a.STORE_ADDR3
+			, a.EVENT_COMMENT
+			, a.REG_DT
+			, a.MOD_DT
+		from 
+			sanga_default_status a
+			, sanga_member b
+		where a.STORE_ID = b.STORE_ID
+		AND a.REG_USER_ID = b.EMAIL
+		<if test='searchTour == "" and searchStore == ""'>
+		</if>
+		
+		<if test='searchTour != "" and searchStore != ""'>
+			and a.TOUR_ADDR3 like concat(concat('%',#{searchTour},'%'))
+			and a.STORE_ID like concat(concat('%',#{searchStore},'%'))
+		</if>
+		
+		<if test='searchTour != "" and searchStore == ""'>
+			and a.TOUR_ADDR3 like concat(concat('%',#{searchTour},'%'))
+		</if>
+		
+		<if test='searchTour == "" and searchStore != ""'>
+			and a.STORE_ID like concat(concat('%',#{searchStore},'%'))
+		</if>
+		order by a.seq desc, a.REG_DT desc
+		LIMIT #{pageStart}, #{perPageNum}
 	</select>
 	
 	<select id="selectViewSanga" resultType="kr.co.guseok.vo.guseoksanga.guseokSangaVO">
 		select 
+			/*sangaDefaultStatusMapper - selectViewSanga*/
 			 a.SEQ
+			, a.API_TOURKEY_ID
 			, b.EMAIL
 			, a.STORE_ID
 			, a.FILE_ID
+			, a.TOUR_ADDR1
+			, a.TOUR_ADDR2
+			, a.TOUR_ADDR3
 			, a.STORE_ADDR1
 			, a.STORE_ADDR2
 			, a.STORE_ADDR3
@@ -53,12 +201,14 @@
 			sanga_default_status a
 			, sanga_member b
 		where a.STORE_ID = b.STORE_ID
+		  AND a.REG_USER_ID = b.EMAIL
 		  and a.SEQ = #{page}
 	</select>
 	
 	<!-- 상가 등록 이미지 View -->
 	<select id="selectSangaImage" resultType="kr.co.guseok.vo.guseoksanga.guseokSangaUploadVO">
 		SELECT 
+			/*sangaDefaultStatusMapper - selectSangaImage*/
 			SEQ
 			,FILE_ID
 			,ATCHMNFL_MASK_NM
@@ -73,10 +223,14 @@
 	<insert id="insertSanga">
 		insert into sanga_default_status 
 		(
+			/*sangaDefaultStatusMapper - insertSanga*/
 			SEQ,
 			API_TOURKEY_ID,
 			STORE_ID,
 			FILE_ID,
+			TOUR_ADDR1,
+			TOUR_ADDR2,
+			TOUR_ADDR3,
 			STORE_ADDR1,
 			STORE_ADDR2,
 			STORE_ADDR3,
@@ -89,9 +243,12 @@
 		VALUES 
 		(
 			(select SEQ_VAL from sanga_seq ALIAS_FOR_SUBQUERY where SEQ_NAME = 'sanga_seq'),
-			"",
+			#{api_tourkey_id},
 			#{store_id},
 			null,
+			#{tour_addr1},
+			#{tour_addr2},
+			#{tour_addr3},
 			#{store_addr1},
 			#{store_addr2},
 			#{store_addr3},
@@ -105,8 +262,13 @@
 	
 	<update id="updateSanga">
 		update sanga_default_status 
-		set 
+		set	
+			/*sangaDefaultStatusMapper - updateSanga*/
 			STORE_ID = #{store_id},
+			API_TOURKEY_ID = #{api_tourkey_id},
+			TOUR_ADDR1 = #{tour_addr1},
+			TOUR_ADDR2 = #{tour_addr2},
+			TOUR_ADDR3 = #{tour_addr3},
 			STORE_ADDR1 = #{store_addr1},
 			STORE_ADDR2 = #{store_addr2},
 			STORE_ADDR3 = #{store_addr3},
@@ -121,6 +283,7 @@
 		update 
 			sanga_member 
 		set 
+			/*sangaDefaultStatusMapper - updateMemberStore*/
 			store_id =  #{store_id}
 		where 
 			email = #{email}
@@ -130,6 +293,7 @@
 	<insert id="insertImageUpload">
 		insert into sanga_images 
 		(
+			/*sangaDefaultStatusMapper - insertImageUpload*/
 			SEQ, 
 			FILE_ID, 
 			ATCHMNFL_MASK_NM, 
@@ -154,6 +318,7 @@
 		update 
 			sanga_default_status
 		set
+			/*sangaDefaultStatusMapper - updateSangaFileid*/
 			FILE_ID = (select SEQ_VAL from sanga_seq ALIAS_FOR_SUBQUERY where SEQ_NAME = 'sangaImgFile_seq')
 		WHERE
 			SEQ = (select SEQ_VAL from sanga_seq ALIAS_FOR_SUBQUERY where SEQ_NAME = 'sanga_seq')
@@ -161,6 +326,7 @@
 	
 	<delete id="deleteSangaImage">
 		DELETE
+		/*sangaDefaultStatusMapper - deleteSangaImage*/
 		FROM 
 			sanga_images
 		WHERE 
@@ -169,10 +335,31 @@
 	
 	<delete id="deleteSangaDefaultStatus">
 		DELETE
+			/*sangaDefaultStatusMapper - deleteSangaDefaultStatus*/
 		FROM 
 			sanga_default_status
 		WHERE 
 			SEQ = #{seq}	
 	</delete>
+	
+	<update id="updateSangaNullImage">
+		UPDATE 
+			/*sangaDefaultStatusMapper - updateSangaNullImage*/
+			sanga_default_status 
+		SET 
+			FILE_ID = NULL
+		WHERE 
+			SEQ = #{seq}
+	</update>
+	
+	<update id="updateSangaMemberStore">
+		UPDATE 
+			/*sangaDefaultStatusMapper - updateSangaMemberStore*/
+			sanga_member
+		SET 
+			STORE_ID = NULL
+		WHERE 
+			STORE_ID = #{store_id}
+	</update>
 </mapper> 
 

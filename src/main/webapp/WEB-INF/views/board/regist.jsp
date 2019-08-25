@@ -1,17 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<script type="text/javascript">
+	function fpopup() {
+		window.open("/board/locationlo");
+	}
+	
+	function addrpopup(){
+		window.open("/board/searchaddr");
+	}
+</script>
 
-		
+<<style>
+	.error {
+		color: red;
+	}
+	
+	a.images_delete {
+		padding: 0.4em 0.7em;
+	}
+	
+</style>
 		<!-- Section Three -->
 			<c:choose>
 		        <c:when test="${updataValues.seq ne null}">
-		            <form action="/board/updateproc" method="post" enctype="multipart/form-data">
+		            <form action="/board/updateproc" method="post" enctype="multipart/form-data" id="regform">
 		                <input type="hidden" id="page" name="page" value="${updataValues.seq}">
 		                <input type="hidden" id="file" name="file" value="${updataValues.file_id}">
 		        </c:when>
 		        <c:when test="${updataValues.seq eq null}">
-		            <form action="/board/registproc" method="post" enctype="multipart/form-data">
+		            <form action="/board/registproc" method="post" enctype="multipart/form-data" id="regform">
 		        </c:when>
 		    </c:choose>
 			<div class="wrapper style4">
@@ -21,11 +39,22 @@
 							<ul class="special-icons">
 								<li>
 									<h3>관광지 선택</h3>
-									<input type="text" style="width:100%">
+									<p style="margin: 0px; padding:0px;">API 관광지 선택 : <a href="javascript:fpopup()">검색</a></p>
+							        <a href="javascript:fpopup()"><input id="tour_addr3" name="tour_addr3" type="text" style="width:100%" readonly value="${updataValues.tour_addr3}"></a>
+									<input id="tour_addr1" name="tour_addr1" type="hidden" style="width:100%" readonly value="${updataValues.tour_addr1}">
+									<input id="tour_addr2" name="tour_addr2" type="hidden" style="width:100%" readonly value="${updataValues.tour_addr2}">
+									<input id="api_tourkey_id" name="api_tourkey_id" type="hidden" style="width:100%" readonly value="${updataValues.api_tourkey_id}">
+								</li>
+								<li>
+									<h3>상가 주소</h3>
+									<p style="margin: 0px; padding:0px;">상가 주소 검색 : <a href="javascript:addrpopup()">검색</a></p>
+						            <a href="javascript:addrpopup()"><input class="store_addr" id="store_addr1" name="store_addr1" type="text" value="${updataValues.store_addr1}" placeholder="우편번호" readonly="readonly"></a>
+									<a href="javascript:addrpopup()"><input class="store_addr" id="store_addr2" name="store_addr2" type="text" value="${updataValues.store_addr2}" placeholder="주소" readonly="readonly"></a>
+									<input class="store_addr" id="store_addr3" name="store_addr3" type="text" value="${updataValues.store_addr3}" placeholder="나머지주소">
 								</li>
 								<li>
 									<h3>상가명 입력</h3>
-									<input id="store_id" name="store_id" type="text" value="${updataValues.store_id}">
+									<input id="store_id" name="store_id" type="text" style="width:100%" value="${updataValues.store_id}">
 								</li>
 								<li>
 									<h3>홍보글 입력</h3>
@@ -33,12 +62,15 @@
 								</li>
 								<li>
 									<input multiple="multiple" id="imgFiled" name="imgFiled" type="file">
+									<c:if test="${updataValues.seq ne null}">
+										<c:if test="${updataValues.file_id ne 0}">
+											<a class="button images_delete" href="javascript:image_delete_choice(${updataValues.seq}, ${updataValues.file_id})">이미지삭제</a>
+										</c:if>
+									</c:if>
 									
 								</li>
 								<li>
 									<input class="button" type="submit" value="버튼을 눌러 완료하세요" />
-								
-<!-- 									<a href="#" class="button">버튼을 눌러 완료 하세요</a> -->
 								</li>
 							</ul>
 						</div>
@@ -48,70 +80,95 @@
 				</section>
 			</div>
 			</form>
+			
+<script type="text/javascript">
+
+function image_delete_choice(seq, file_id){
+	if(confirm("등록되어 있는 이미지를 삭제하시겠습니까?")){
+		images_delete(seq, file_id)
+	} else {
 		
-		<!-- Team 
-			<div class="wrapper style5">
-				<section id="team" class="container">
-					<header class="major">
-						<h2>이달의 Best 방문객 정보</h2>
-						<span class="byline">앱을 통해서 여러분에게 드리는 응원의 메시지 입니다!</span>
-					</header>
-					<div class="row">
-						<div class="3u">
-							<a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
-							<h3>중앙시장 비비드</h3>
-							<p>여친이랑 가서 커플링 하나 했어요..번창하세요</p>
-						</div>
-						<div class="3u">
-							<a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
-							<h3>중앙시장 칼국수</h3>
-							<p>숨은 맛집이 여기 있었네요...</p>
-						</div>
-						<div class="3u">
-							<a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
-							<h3>떡볶이</h3>
-							<p>완전 매움 ㅠㅠ</p>
-						</div>
-						<div class="3u">
-							<a href="#" class="image"><img src="images/placeholder.png" alt=""></a>
-							<h3>VR 체험장</h3>
-							<p>아이들이 너무 좋아하네요. 또 올께요</p>
-						</div>
-					</div>
-				</section>
-			</div>
--->
+	}
+}
 
-<!-- <!DOCTYPE html> -->
-<!-- <html> -->
-<!-- <head> -->
-<!-- <meta charset="EUC-KR"> -->
-<!-- <title>상가등록</title> -->
-<!-- </head> -->
-<!-- <body> -->
-<%-- 	<c:choose> --%>
-<%-- 	    <c:when test="${updataValues.seq ne null}"> --%>
-<!-- 	        <form action="/board/updateproc" method="post" enctype="multipart/form-data"> -->
-<%-- 	        <input type="hidden" id="page" name="page" value="${updataValues.seq}"> --%>
-<%-- 	        <input type="hidden" id="file" name="file" value="${updataValues.file_id}"> --%>
-<%-- 	    </c:when> --%>
-	 
-<%-- 	    <c:when test="${updataValues.seq eq null}"> --%>
-<!-- 	       	<form action="/board/registproc" method="post" enctype="multipart/form-data"> -->
-<%-- 	    </c:when> --%>
-<%-- 	</c:choose> --%>
 
-<%-- 		<input type="hidden" id="email" name="email" value="${login.email}" > --%>
-<!-- 		관광지선택<input id="location" name="location" type="text"> -->
-<%-- 		도<input id="store_addr1" name="store_addr1" type="text" value="${updataValues.store_addr1}"> --%>
-<%-- 		시/군/구<input id="store_addr2" name="store_addr2" type="text" value="${updataValues.store_addr2}"> --%>
-<%-- 		관광지<input id="store_addr3" name="store_addr3" type="text" value="${updataValues.store_addr3}"> --%>
-<%-- 		상가명입력<input id="store_id" name="store_id" type="text" value="${updataValues.store_id}"> --%>
-<%-- 		홍보글입력<textarea id="event_comment" name="event_comment" rows="5" cols="5">${updataValues.event_comment}</textarea> --%>
-<!-- 		이미지업로드<input multiple="multiple" id="imgFiled" name="imgFiled" type="file"> -->
+function images_delete(seq, file_id){
+	
+	var file_data = {"seq": seq, "file": file_id};
+	
+	$.ajax({
+		   url: "/board/imagedeleteproc",
+		   type: "GET",
+// 		   cache: ,
+// 		   dataType: "",
+		   data: file_data,
+		   success: function(data){
+			   	if(data == 1){
+					alert("등록된 이미지가 삭제돼었습니다.");
+					location.reload();
+				} else if(data == 0){
+					alert("삭제되지 않았습니다. 문의하시길 바랍니다.");
+				}
+		   },
+		
+		   error: function (request, status, error){        
+				console.log(error);
+		   }
+	});
+}
 
-<!-- 		<input type="submit"> -->
-<!-- 	</form> -->
-<!-- 	<p><a href="/board/list">되돌아가기</a></p> -->
-<!-- </body> -->
-<!-- </html> -->
+
+$(function() {
+    $("#regform").validate({ rules: { 
+    	
+    // id , name 은 폼태그내에 존재하는 name명이다. 
+        tour_addr3 : { 
+        	//해당 옵션을 주면 필수체크! 
+        	required : true 
+        }, 
+        store_addr1 : { 
+       		required : true
+       	}, 
+       	store_addr2 : { 
+       		required : true
+       	},
+       	store_addr3 : { 
+       		required : true
+       	},
+       	store_id : {
+       		required : true
+       	},
+       	event_comment : {
+       		required : true
+       	}
+    }, 
+		messages: { 
+			// id , name 은 폼태그내에 존재하는 name명이다. 
+			// alert에 들어가는 문자내용 
+			// 하지만 text로만 화면에 보여진다는 것! 
+   			tour_addr3: { 
+   				required: "관광지를 선택해주세요." 
+   			}, 
+   			store_addr1: { 
+   				required: "우편번호를 입력해주세요." 
+   			}, 
+   			store_addr2: { 
+   				required: "주소를 입력해주세요." 
+   			}, 
+   			store_addr3: { 
+   				required: "나머지주소를 입력해주세요." 
+   			}, 
+   			store_id: { 
+   				required: "상가명을 입력해주세요." 
+   			}, 
+   			event_comment: { 
+   				required: "홍보내용을 입력해주세요." 
+   			}
+		}, 
+		//검증이 끝난후에 작업할 부분 (submit??) 
+		submitHandler: function(form) { 
+			form.submit();
+		} 
+	}); 
+});
+</script>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.guseok.mapper.androidResponseMapper">
+	<select id="getTourMember" resultType="kr.co.guseok.vo.guseoktourmember.guseokTourMemberVO">
+		select 
+			*
+		from 
+			tour_member
+		where
+			email=#{email} 
+			and pw = #{pw}
+	</select>
+	
+	<select id="checkTourMember" resultType="kr.co.guseok.vo.guseoktourmember.guseokTourMemberVO">
+		select 
+			*
+		from 
+			tour_member
+		where
+			email=#{email} 			
+	</select>
+	
+	<select id="getTourMemberSeq" resultType="long">
+		SELECT MAX(SEQ)+1 FROM tour_member		
+	</select>
+	
+	<insert id="insertMember">
+		insert into tour_member 
+		(
+			SEQ, 
+			EMAIL, 
+			PW, 
+			REG_DT
+		) 
+		VALUES 
+		(
+			#{seq},
+			#{email},
+			#{pw},
+			NOW()
+		)
+	</insert>
+	
+	<select id="getTourRankList" resultType="kr.co.guseok.vo.guseoksanga.guseokTourRankVO">
+		select 
+			*
+		from 
+			tour_rank
+		where
+			SANGA_SEQ=#{sanga_seq} 			
+	</select>
+	
+	<select id="storeList" resultType="kr.co.guseok.vo.guseoksanga.guseokSangaVO">
+		select 
+			*
+		from 
+			sanga_default_status
+		where
+			API_TOURKEY_ID=#{api_tourkey_id} 			
+	</select>
+	
+	<select id="getTourRankSeq" resultType="int">
+		SELECT MAX(SEQ)+1 FROM tour_rank		
+	</select>
+	
+	<insert id="insertTourRank">
+		insert into tour_rank
+		(			
+			SEQ,
+			STORE_ID,
+			RANK,
+			RANK_COMMENT,
+			REG_USER_ID,
+			REG_DT,
+			SANGA_SEQ
+		) 
+		VALUES 
+		(
+			#{seq},
+			#{store_id},
+			#{rank},
+			#{rank_comment},
+			#{reg_user_id},
+			NOW(),
+			#{sanga_seq}	
+		)
+	</insert>
+</mapper> 

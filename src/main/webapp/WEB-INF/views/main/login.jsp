@@ -44,7 +44,7 @@
                                 <!-- Username -->
                                 <INPUT class="form-control main" required="" type="email" id="email" name="email" placeholder="Username" value=""><!-- Password -->
                                 <INPUT class="form-control main" required="" type="password" id="pw" name="pw" placeholder="Password" value=""><!-- Submit Button -->
-                                <input class="btn btn-main-md" type="submit" value="로그인"/>
+                                <input class="btn btn-main-md" type="submit" value="로그인" style="margin-bottom:3px;"/>
                                 <a class="btn btn-main-md" href="/main/signup">회원가입</a>
                             </FORM>
                             <DIV class="new-acount"><A href="">비밀번호를 잊으셨나요?</A></DIV>

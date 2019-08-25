@@ -4,25 +4,32 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <meta charset="utf-8">
-    	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+    	<!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
         <title>
-            <decorator:title default="traveler" />
+            <decorator:title default="대한민국 골목 구석구석" />
         </title>
-        <style>
-        </style>
+
 	<%-- <decorator:head /> --%>
-	<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
+<!-- 		<title>TourAPI</title> -->
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
 		<script src="/js/jquery.min.js"></script>
 		<script src="/js/jquery.dropotron.min.js"></script>
 		<script src="/js/skel.min.js"></script>
 		<script src="/js/skel-layers.min.js"></script>
 		<script src="/js/init.js"></script>
 		
-		<link rel="stylesheet" href="/css/skel.css" />
-		<link rel="stylesheet" href="/css/style.css" />
-	<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-<!-- 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"> -->
+		<script type="text/javascript" src="/validation/js/jquery.validate.js"></script>
+
+		<noscript>
+			<link rel="stylesheet" href="/css/skel.css" />
+			<link rel="stylesheet" href="/css/style.css" />
+			<link rel="stylesheet" href="/validation/css/screen.css" /> 
+		</noscript>
+		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
     </head>
     <body class="homepage">
 		<div class="wrapper style1">
@@ -37,6 +44,7 @@
 					<!-- Nav -->
 					<nav id="nav">
 						<ul>
+							<li><a href="/main/main">메인으로</a></li>
 							<c:choose>
 							    <c:when test="${login.email ne null}">
 							        <li class="active"><a href="/main/logoutproc">로그아웃</a></li>
@@ -46,7 +54,9 @@
 							       	<li class="active"><a href="/main/login">로그인</a></li>
 							    </c:when>
 							</c:choose>
+							
 							<li><a href="/board/list">상가리스트</a></li>
+							<li><a href="/main/sangaapi" target="_blank">골목 구석구석 API</a></li>
 							<li><a href="http://api.visitkorea.or.kr" target="_blank">TourAPI</a></li>
 							<li><a href="http://www.true-inno.com" target="_blank">True Innovation</a></li>
 							<li><a href="http://visitkorea.or.kr" target="_blank">Contact Us</a></li>
@@ -85,7 +95,7 @@
 				</div>			
 		</div>
         
-<!--         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+<!--        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
 <!-- 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> -->
 <!-- 		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> -->
         <script>

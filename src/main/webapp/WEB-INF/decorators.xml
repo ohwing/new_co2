@@ -9,5 +9,7 @@
 <!--         <pattern>/*_pop</pattern> -->
 		<pattern>/main/login</pattern>
 		<pattern>/main/signup</pattern>
+		<pattern>/board/searchaddr</pattern>
+		<pattern>/board/csstest</pattern>
     </excludes>
 </decorators>
