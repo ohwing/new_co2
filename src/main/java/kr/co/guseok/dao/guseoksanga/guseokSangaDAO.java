@@ -1,7 +1,9 @@
 package kr.co.guseok.dao.guseoksanga;
 
 import java.util.List;
+import java.util.Map;
 
+import kr.co.guseok.commons.paging.Criteria;
 import kr.co.guseok.vo.guseokmember.guseokMemberVO;
 import kr.co.guseok.vo.guseoksanga.guseokSangaUploadVO;
 import kr.co.guseok.vo.guseoksanga.guseokSangaVO;
@@ -13,6 +15,8 @@ public interface guseokSangaDAO {
 	
 	public List<guseokSangaVO> selectListSangaDefaultStatus();
 	
+	public List<guseokSangaVO> selectListSangaSearch(Map<String, Object> map);
+	
 	public guseokSangaVO selectViewSangaDefaultStatus(String page);
 	
 	public void insertSangaImagesUpload(guseokSangaUploadVO guseokSangaUploadVo);
@@ -23,6 +27,15 @@ public interface guseokSangaDAO {
 	
 	public void deleteSangaDefaultStatus(guseokSangaVO guseokSangaVo);
 	
+	public List<guseokSangaVO> selectSangaNewestList();
+	
+	public List<guseokSangaVO> selectPagingList(Criteria criteria);
+	
+	public int selectListCount(Criteria criteria);
+	
+	public int selectSearchListCount(Map<String, Object> map);
+	
+//	public List<guseokSangaVO> listCriteria(Criteria criteria) throws Exception;
 	
 	
 }

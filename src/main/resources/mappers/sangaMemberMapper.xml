@@ -3,6 +3,7 @@
 <mapper namespace="kr.co.guseok.mapper.sangaMemberMapper">
 	<select id="getMember" resultType="kr.co.guseok.vo.guseokmember.guseokMemberVO">
 		select 
+			/*sangaMemberMapper - getMember*/
 			seq
 			, store_id
 			, email
@@ -18,6 +19,7 @@
 	<insert id="insertMember">
 		insert into sanga_member 
 		(
+			/*sangaMemberMapper - insertMember*/
 			SEQ, 
 			EMAIL, 
 			PW, 

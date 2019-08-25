@@ -5,6 +5,9 @@ public class guseokSangaVO {
 	private String api_tourkey_id = null;
 	private String store_id = null;
 	private int file_id = 0;
+	private String tour_addr1 = null;
+	private String tour_addr2 = null;
+	private String tour_addr3 = null;
 	private String store_addr1 = null;
 	private String store_addr2 = null;
 	private String store_addr3 = null;
@@ -30,30 +33,6 @@ public class guseokSangaVO {
 
 	public void setApi_tourkey_id(String api_tourkey_id) {
 		this.api_tourkey_id = api_tourkey_id;
-	}
-
-	public String getStore_addr1() {
-		return store_addr1;
-	}
-
-	public void setStore_addr1(String store_addr1) {
-		this.store_addr1 = store_addr1;
-	}
-
-	public String getStore_addr2() {
-		return store_addr2;
-	}
-
-	public void setStore_addr2(String store_addr2) {
-		this.store_addr2 = store_addr2;
-	}
-
-	public String getStore_addr3() {
-		return store_addr3;
-	}
-
-	public void setStore_addr3(String store_addr3) {
-		this.store_addr3 = store_addr3;
 	}
 
 	public String getEvent_comment() {
@@ -118,6 +97,54 @@ public class guseokSangaVO {
 
 	public void setFile_id(int file_id) {
 		this.file_id = file_id;
+	}
+
+	public String getTour_addr1() {
+		return tour_addr1;
+	}
+
+	public void setTour_addr1(String tour_addr1) {
+		this.tour_addr1 = tour_addr1;
+	}
+
+	public String getTour_addr2() {
+		return tour_addr2;
+	}
+
+	public void setTour_addr2(String tour_addr2) {
+		this.tour_addr2 = tour_addr2;
+	}
+
+	public String getTour_addr3() {
+		return tour_addr3;
+	}
+
+	public void setTour_addr3(String tour_addr3) {
+		this.tour_addr3 = tour_addr3;
+	}
+
+	public String getStore_addr1() {
+		return store_addr1;
+	}
+
+	public void setStore_addr1(String store_addr1) {
+		this.store_addr1 = store_addr1;
+	}
+
+	public String getStore_addr2() {
+		return store_addr2;
+	}
+
+	public void setStore_addr2(String store_addr2) {
+		this.store_addr2 = store_addr2;
+	}
+
+	public String getStore_addr3() {
+		return store_addr3;
+	}
+
+	public void setStore_addr3(String store_addr3) {
+		this.store_addr3 = store_addr3;
 	}
 
 }

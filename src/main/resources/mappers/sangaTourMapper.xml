@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.guseok.mapper.sangaTourMapper">
+	<select id="selectTourComment" resultType="kr.co.guseok.vo.guseoksanga.guseokTourRankVO">
+		select 
+			/*sangaTourMapper - selectTourComment*/
+			SEQ
+			,STORE_ID
+			,RANK
+			,RANK_COMMENT
+			,REG_USER_ID
+			,REG_DT
+		
+		from 
+			tour_rank
+		where
+			store_id = #{store_id}
+		order by
+			REG_DT desc
+	</select>
+	
+	<select id="selectTourRank" resultType="kr.co.guseok.vo.guseoksanga.guseokTourRankVO">
+		SELECT 
+			/*sangaTourMapper - selectTourRank*/
+			sanga.TOUR_ADDR3, 
+			rank.STORE_ID,
+			rank.RANK_COMMENT,
+			ROUND(
+				SUM(rank.RANK)/
+				(SELECT COUNT(*) 
+					FROM 
+						tour_rank rank, 
+						sanga_default_status sanga 
+					WHERE 
+						rank.STORE_ID = sanga.STORE_ID
+			),  1) RANK, 	
+			rank.REG_DT
+		FROM 
+			tour_rank rank, 
+			sanga_default_status sanga
+		WHERE
+			rank.STORE_ID = sanga.STORE_ID
+			ORDER BY rank.RANK DESC
+		LIMIT 4
+	</select>
+
+</mapper> 

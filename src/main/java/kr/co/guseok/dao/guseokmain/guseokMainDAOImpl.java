@@ -21,7 +21,7 @@ public class guseokMainDAOImpl implements guseokMainDAO{
 	private guseokSeqVO guseokSeqVo = new guseokSeqVO();
 	
 	@Override
-	public guseokMemberVO guseokSangaMember(guseokMemberVO guseokMemberVo) {
+	public guseokMemberVO selectOneSangaMember(guseokMemberVO guseokMemberVo) {
 		// TODO Auto-generated method stub
 		
 		return (guseokMemberVO) sqlSession.selectOne(namespace+".getMember", guseokMemberVo);

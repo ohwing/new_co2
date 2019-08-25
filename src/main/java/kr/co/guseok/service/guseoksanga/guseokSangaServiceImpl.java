@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 import java.util.TimeZone;
 import java.util.UUID;
 
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import kr.co.guseok.commons.paging.Criteria;
 import kr.co.guseok.dao.guseoksanga.guseokSangaDAO;
 import kr.co.guseok.dao.guseokseq.guseokSeqDAO;
 import kr.co.guseok.vo.guseokmember.guseokMemberVO;
@@ -31,7 +33,12 @@ public class guseokSangaServiceImpl implements guseokSangaService{
 	@Autowired
 	private guseokSeqDAO seqDao;
 	
+	//로컬 경로
 	String savePath = "D:\\upload\\images";
+	
+	//운영경로
+//	String savePath = "/ohwig1/tomcat/webapps/fileupload";
+	
     int sizeLimit = 3 * 1024 * 1024;
 	
 	@Override
@@ -51,6 +58,12 @@ public class guseokSangaServiceImpl implements guseokSangaService{
 		return sangaDao.selectListSangaDefaultStatus();
 		
 	}
+	
+	@Override
+	public List<guseokSangaVO> selectListSangaSearch(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sangaDao.selectListSangaSearch(map);
+	}
 
 	@Override
 	public guseokSangaVO selectViewSangaDefaultStatus(String page) {
@@ -59,6 +72,8 @@ public class guseokSangaServiceImpl implements guseokSangaService{
 	}
 	
 	public String imgUpLoader(MultipartHttpServletRequest request, List<MultipartFile> uploadFile, guseokMemberVO guseokMemberVo) throws Exception {
+		
+//		savePath = request.getServletPath();
 		
 		OutputStream out = null;
         PrintWriter printWriter = null;
@@ -147,5 +162,31 @@ public class guseokSangaServiceImpl implements guseokSangaService{
 			}
 		}
 	}
+
+	@Override
+	public List<guseokSangaVO> selectSangaNewestList() {
+		// TODO Auto-generated method stub
+		return sangaDao.selectSangaNewestList();
+	}
+
+	@Override
+	public List<guseokSangaVO> selectPagingList(Criteria criteria) {
+		// TODO Auto-generated method stub
+		return sangaDao.selectPagingList(criteria);
+	}
+
+	@Override
+	public int selectListCount(Criteria criteria) {
+		// TODO Auto-generated method stub
+		return sangaDao.selectListCount(criteria);
+	}
+
+	@Override
+	public int selectSearchListCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sangaDao.selectSearchListCount(map);
+	}
+
+	
 	
 }

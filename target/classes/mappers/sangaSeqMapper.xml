@@ -3,6 +3,7 @@
 <mapper namespace="kr.co.guseok.mapper.sangaSeqMapper">
 	<select id="selectSeq" resultType="kr.co.guseok.vo.guseokseq.guseokSeqVO">
 		select 
+			/*sangaSeqMapper - selectSeq*/
 			SEQ_NAME, 
 			SEQ_VAL 
 		from 
@@ -13,6 +14,7 @@
 	
 	<update id="updateSeq">
 		update 
+			/*sangaSeqMapper - updateSeq*/
 			sanga_seq 
 		set 
 			seq_val = #{seq_val}

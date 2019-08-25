@@ -1,11 +1,14 @@
 package kr.co.guseok.dao.guseoksanga;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.guseok.commons.paging.Criteria;
 import kr.co.guseok.dao.guseokseq.guseokSeqDAO;
 import kr.co.guseok.vo.guseokmember.guseokMemberVO;
 import kr.co.guseok.vo.guseoksanga.guseokSangaUploadVO;
@@ -46,6 +49,13 @@ public class guseokSangaDAOImpl implements guseokSangaDAO{
 		// TODO Auto-generated method stub
 		return sqlSession.selectList(namespace+".selectListSanga");
 	}
+	
+	@Override
+	public List<guseokSangaVO> selectListSangaSearch(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		
+		return sqlSession.selectList(namespace+".selectListSangaSearch", map);
+	}
 
 	@Override
 	public guseokSangaVO selectViewSangaDefaultStatus(String page) {
@@ -82,8 +92,28 @@ public class guseokSangaDAOImpl implements guseokSangaDAO{
 		sqlSession.delete(namespace+".deleteSangaDefaultStatus", guseokSangaVo);
 	}
 
-	
+	@Override
+	public List<guseokSangaVO> selectSangaNewestList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".selectSangaNewestList");
+	}
 
-	
+	@Override
+	public List<guseokSangaVO> selectPagingList(Criteria criteria) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList(namespace+".selectPagingList", criteria);
+	}
+
+	@Override
+	public int selectListCount(Criteria criteria) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".selectListCount", criteria);
+	}
+
+	@Override
+	public int selectSearchListCount(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne(namespace+".selectSearchListCount", map);
+	}
 
 }
