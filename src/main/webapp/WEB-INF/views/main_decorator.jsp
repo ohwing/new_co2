@@ -43,7 +43,7 @@
 					
 					<!-- Nav -->
 					<nav id="nav">
-						<ul>
+						<ul> 
 							<li><a href="/main/main">메인으로</a></li>
 							<c:choose>
 							    <c:when test="${login.email ne null}">
