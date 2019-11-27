@@ -103,8 +103,6 @@
 									<p>ÆòÁ¡: ${rank.rank}</p>
 								</a>
 							</div>
-							
-							
 						</c:forEach>
 					</div>
 				</section>

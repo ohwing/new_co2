@@ -32,7 +32,7 @@ public interface guseokSangaDAO {
 	public void deleteSangaDefaultStatus(guseokSangaVO guseokSangaVo);
 	
 	public void updateSangaMemberStore(guseokSangaVO guseokSangaVo);
-	
+
 	public List<guseokSangaVO> selectSangaNewestList();
 	
 	public List<guseokSangaVO> selectPagingList(Criteria criteria);

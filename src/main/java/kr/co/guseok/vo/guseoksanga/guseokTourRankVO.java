@@ -84,8 +84,4 @@ public class guseokTourRankVO {
 	public void setAtchmnfl_mask_nm(String atchmnfl_mask_nm) {
 		this.atchmnfl_mask_nm = atchmnfl_mask_nm;
 	}
-	
-	
-	
-	
 }

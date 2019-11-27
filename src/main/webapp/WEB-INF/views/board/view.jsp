@@ -176,7 +176,6 @@ p {
 	  margin-bottom: 0.75rem;
 	}
  /* Image Card */ 
- 
  hr {
   margin-top: 1rem;
   margin-bottom: 1rem;

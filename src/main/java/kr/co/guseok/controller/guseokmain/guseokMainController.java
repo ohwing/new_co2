@@ -1,6 +1,5 @@
 package kr.co.guseok.controller.guseokmain;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,6 +69,7 @@ public class guseokMainController {
 //			logger.debug("== " + list.getRank());
 //			logger.debug(list.getReg_dt());
 //		}
+
 		
 		model.addAttribute("rankList", rankList);
 		model.addAttribute("newestList", newestList);

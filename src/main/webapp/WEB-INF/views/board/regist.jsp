@@ -11,7 +11,7 @@
 	}
 </script>
 
-<<style>
+<style>
 	.error {
 		color: red;
 	}
@@ -67,7 +67,6 @@
 											<a class="button images_delete" href="javascript:image_delete_choice(${updataValues.seq}, ${updataValues.file_id})">이미지삭제</a>
 										</c:if>
 									</c:if>
-									
 								</li>
 								<li>
 									<input class="button" type="submit" value="버튼을 눌러 완료하세요" />
@@ -116,7 +115,6 @@ function images_delete(seq, file_id){
 		   }
 	});
 }
-
 
 $(function() {
     $("#regform").validate({ rules: { 

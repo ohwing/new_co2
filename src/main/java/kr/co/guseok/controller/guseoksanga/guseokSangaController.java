@@ -353,14 +353,12 @@ public class guseokSangaController {
 			sangaService.deleteSangaImage(guseokSangaUploadVo);
 		}
 		
-		
 		sangaService.deleteSangaDefaultStatus(guseokSangaVo);
 		sangaService.updateSangaMemberStore(guseokSangaVo);
 		
 		return "redirect: /board/list";
 	}
 	
-
 	@RequestMapping(value = "/imagedeleteproc", method=RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public int imageDeleteproc(HttpServletRequest request, Model model, HttpSession httpSession, guseokSangaVO guseokSangaVo, guseokSangaUploadVO guseokSangaUploadVo) throws Exception {
@@ -389,7 +387,6 @@ public class guseokSangaController {
 		
 		return 0;
 	}
-	
 	/**
 	 * 지역코드 
 	 * @param model

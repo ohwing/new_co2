@@ -210,7 +210,6 @@ public class guseokSangaServiceImpl implements guseokSangaService{
 		// TODO Auto-generated method stub
 		return sangaDao.getSanga();
 	}
-
 	
 	
 }
